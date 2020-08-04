@@ -8,7 +8,7 @@ function getEncoding(encoding:string):Encoding{
         coding=new Encoding('utf-8')
     }
     return coding;
-    
+     
 }
 var context = server.context;
 var request = context.request;
