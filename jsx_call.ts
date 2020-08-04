@@ -8,7 +8,7 @@ namespace Balance {
             this.methods[name.toLowerCase()] = { fun: fun };
         } 
         public CallRPC(querys: any): any {
-            var op: string = querys.op;
+            var op: string = querys.op; 
             if (op == undefined)
                 throw new Error('调用丢失op标识');
             var m: {fun: (args: any,argument:any) => any} = this.methods[op.toString().toLowerCase()];
