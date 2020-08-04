@@ -6,7 +6,7 @@ namespace Balance {
         }
         protected addRPC(name: string, fun: (querys:any, argument: any) => any) {
             this.methods[name.toLowerCase()] = { fun: fun };
-        }
+        } 
         public CallRPC(querys: any): any {
             var op: string = querys.op;
             if (op == undefined)
