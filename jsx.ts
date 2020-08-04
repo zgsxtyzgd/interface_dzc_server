@@ -17,7 +17,7 @@ var response = context.response;
 var response_charset: string = request.headers.getItem('Accept-Charset');
 if (response_charset != undefined)
     response_charset = response_charset.trim();
-else
+else 
     response_charset = 'utf-8';
 try {
     var contentType=request._contentType;
