@@ -1,11 +1,12 @@
-var Balance;
-(function (Balance) {
+var DZC;
+(function (DZC) {
     var JSXCall = (function () {
         function JSXCall() {
             this.methods = {};
         }
-        JSXCall.prototype.addRPC = function (name, fun) {
-            this.methods[name.toLowerCase()] = { fun: fun };
+        JSXCall.prototype.addRPC = function (name, fun, checkSID) {
+            if (checkSID === void 0) { checkSID = false; }
+            this.methods[name.toLowerCase()] = { fun: fun, checkSID: checkSID };
         };
         JSXCall.prototype.CallRPC = function (querys) {
             var op = querys.op;
@@ -14,6 +15,12 @@ var Balance;
             var m = this.methods[op.toString().toLowerCase()];
             if (m == undefined)
                 throw new Error('远程方法"{0}"没有被定义'.format(op));
+            var config = using('config.json');
+            if (m.checkSID) {
+                var sid = config.sid;
+                if (querys.sid != sid)
+                    throw new Error('sid错误');
+            }
             var argument;
             if (querys.argument != undefined)
                 argument = JSON.parse(querys.argument);
@@ -21,6 +28,6 @@ var Balance;
         };
         return JSXCall;
     }());
-    Balance.JSXCall = JSXCall;
+    DZC.JSXCall = JSXCall;
     exports = JSXCall;
-})(Balance || (Balance = {}));
+})(DZC || (DZC = {}));

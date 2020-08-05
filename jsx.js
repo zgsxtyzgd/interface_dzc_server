@@ -35,7 +35,7 @@ try {
             var s = item.split('=');
             var n = decodeURIComponent(s[0]);
             var v = decodeURIComponent(s[1]);
-            args_1[n] = v; 
+            args_1[n] = v;
         });
     }
     var entryFunction = using(localPath);

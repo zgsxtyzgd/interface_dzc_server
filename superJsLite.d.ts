@@ -257,6 +257,8 @@ interface DBScope{
 interface DB{
     createScope(cnnString:string):DBScope;
     createScope(cnnString:string,beginTrans:boolean):DBScope;
+    /**isRaw指示直接使用原始语句执行 */
+    createScope(cnnString:string,beginTrans:boolean,isRaw:boolean):DBScope;
 }
 
 interface Random{
