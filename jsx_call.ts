@@ -23,7 +23,7 @@ namespace DZC {
             let argument;
             if(querys.argument!=undefined)
                 argument=JSON.parse(querys.argument);
-            return m.fun(querys,argument);
+            return  m.fun.call(this,querys,argument);
         }
     }
     exports = JSXCall;
