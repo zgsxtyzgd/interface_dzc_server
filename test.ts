@@ -69,6 +69,7 @@ function txx(src: string, desc: string) {
             case 'udt_qty':
             case 'udt_rate':
             case 'udt_rate100':
+            case 'userdecimal':
                 return "number";
             case 'bit':
                 return "boolean";
@@ -83,6 +84,7 @@ function txx(src: string, desc: string) {
             case 'ufemail':
             case 'ufuid':
             case 'varchar':
+
                 return 'string';
             case 'ufdate':
             case 'ufdatetime':
@@ -102,7 +104,6 @@ function txx(src: string, desc: string) {
             case 'ufreference':
             case 'ufuid':
             case 'uniqueidentifier':
-            case 'userdecimal':
             case 'varbinary':
             case 'binary':
             default:
@@ -113,7 +114,7 @@ function txx(src: string, desc: string) {
 
     var desc_ss = desc.split(/field\-\>/);
     var s = '';
-    if(src!=null){
+    if (src != null) {
         var desc_dict = {};
         for (let i = 0; i < desc_ss.length; i++) {
             var r = desc_ss[i];
@@ -122,7 +123,7 @@ function txx(src: string, desc: string) {
                 continue;
             r = r.replace('\r\n', '');
             var rx = r.split(/\t/);
-            desc_dict[rx[0].toLowerCase()] = { type:CastType(rx[1]), nullable: rx[2].toLowerCase() == 'yes', desc: rx[3] };
+            desc_dict[rx[0].toLowerCase()] = { type: CastType(rx[1]), nullable: rx[2].toLowerCase() == 'yes', desc: rx[3] };
         }
         var first = true;
         var src_ss = src.split(',');
@@ -136,14 +137,14 @@ function txx(src: string, desc: string) {
 
             var v = desc_dict[rk];
             var result = rk;
-            if(rv=='NULL')
-                rv='null';
+            if (rv == 'NULL')
+                rv = 'null';
             else
-                rv=rv.replace("N'","'");
-            
+                rv = rv.replace("N'", "'");
+
             result += '\t' + rv;
             if (v != undefined) {
-                result +='\t'+ v.type;
+                result += '\t' + v.type;
                 result += '\t' + (v.nullable ? '是' : '否');
                 result += '\t' + v.desc;
             }
@@ -156,32 +157,57 @@ function txx(src: string, desc: string) {
             s += result;
         }
     }
-    else{
+    else {
         for (let i = 0; i < desc_ss.length; i++) {
             var r = desc_ss[i];
             r = r.trim();
             if (r == '')
                 continue;
             r = r.replace(/\r?\n/g, '');
-            
+
             var rx = r.split(/\t/);
-            s+=rx[0]+':'+CastType(rx[1]);
-            if(i<desc_ss.length-1)
-                s+=',';
-            s+=' //'+rx[3]+"\r\n";
+            s += rx[0].toLowerCase() + ':' + CastType(rx[1]);
+            if (i < desc_ss.length - 1)
+                s += ',';
+            s += ' //' + rx[3] + "\r\n";
         }
-        s='{'+s+'}'
+        s = '{' + s + '}'
     }
     return s;
 
 }
 
-function splitEx(s:string,spliter:any,each:(v:string,idx:number)=>any):string{
-    var ss=s.split(spliter);
-    var vs='';
-    for(let i=0;i<ss.length;i++){
-        vs+=(each(ss[i].replace(/(\r?\n)|\t/g,''),i));
+function splitEx(s: string, spliter: any, each: (v: string, idx: number) => any): string {
+    var ss = s.split(spliter);
+    var vs = '';
+    for (let i = 0; i < ss.length; i++) {
+        vs += (each(ss[i].replace(/(\r?\n)|\t/g, ''), i));
     }
     return vs;
 
+}
+
+function format(vs){
+    var vx=vs.split(/\r?\n/);
+    var tb=[];
+    var cs=[];
+    var r_hz=/^[\u4e00-\u9fa5]$/;
+    for(let i=0;i<vx.length;i++){
+        var r=vx[i].split('\t');
+        for(let c=0;i<r.length;i++){
+            var cx=r[c];
+            var l=0;
+            for(let z=0;z<cx.length;z++){
+                if(r_hz.test(cx[z]))
+                    l+=2;
+                else
+                    l++;
+            }
+            let fx=cs[c]==undefined?0:cs[c];
+            if(l>fx)
+                cs[c]=l;
+        }
+        tb.push(r);
+    };
+    return cs;    
 }

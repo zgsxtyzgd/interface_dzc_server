@@ -57,7 +57,7 @@ declare namespace U8 {
         cverifier: string, //审核人
         dcloseDate: Date, //关闭日期
         dclosetime: Date, //关闭时间
-        dpodate: Date|string, //单据日期
+        dpodate: Date | string, //单据日期
         ibargain: number, //订金
         ibg_overflag: number, //"预算审批状态"
         icost: number, //运费
@@ -70,7 +70,7 @@ declare namespace U8 {
         iverifystateex: number, //单据审核状态 （-1，终审不同意，0，未提交，1已提交，2，终审同意）
         ivtid: number, //单据模版号
         nflat: number, //汇率
-        poid: number|string, //采购订单主表标识
+        poid: number | string, //采购订单主表标识
     }
 
     interface PO_PODetails {
@@ -209,7 +209,7 @@ declare namespace U8 {
         sotype: number //"需求跟踪方式需求跟踪方式需求跟踪方式"
     }
 
-    interface U8_MaterialApp {
+    interface MaterialApp {
         ccloser: string, //关闭人
         ccode: string, //单据号
         ccurrentauditor: string, //当前审批人
@@ -243,7 +243,7 @@ declare namespace U8 {
         csource: string, //来源
         csysbarcode: string, //单据条码
         cvencode: string, //供应商
-        dDate: Date, //单据日期
+        ddate: Date|string, //单据日期
         dmodifyDate: Date, //修改日期
         dnmaketime: Date, //制单时间
         dnmodifytime: Date, //修改时间
@@ -256,6 +256,101 @@ declare namespace U8 {
         iswfcontrolled: number, //是否工作流控制
         iverifystate: number, //工作流审批状态
         vt_id: number //模版号
+    }
+
+    interface MaterialAppVouchs {
+        autoid: number, //autoid
+        cassunit: string, //辅计量单位
+        cbatch: string, //批号
+        cbatchproperty1: number, //属性1
+        cbatchproperty10: Date, //属性10
+        cbatchproperty2: number, //属性2
+        cbatchproperty3: number, //属性3
+        cbatchproperty4: number, //属性4
+        cbatchproperty5: number, //属性5
+        cbatchproperty6: string, //属性6
+        cbatchproperty7: string, //属性7
+        cbatchproperty8: string, //属性8
+        cbatchproperty9: string, //属性9
+        cbcloser: string, //行关闭人
+        cbmemo: string, //表体备注
+        cbsysbarcode: string, //单据行条码
+        cciqbookcode: string, //手册号
+        cdefine22: string, //cdefine22
+        cdefine23: string, //cdefine23
+        cdefine24: string, //cdefine24
+        cdefine25: string, //cdefine25
+        cdefine26: number, //cdefine26
+        cdefine27: number, //cdefine27
+        cdefine28: string, //cdefine28
+        cdefine29: string, //cdefine29
+        cdefine30: string, //cdefine30
+        cdefine31: string, //cdefine31
+        cdefine32: string, //cdefine32
+        cdefine33: string, //cdefine33
+        cdefine34: number, //cdefine34
+        cdefine35: number, //cdefine35
+        cdefine36: Date, //cdefine36
+        cdefine37: Date, //cdefine37
+        cexpirationdate: string, //有效期至
+        cfree1: string, //cfree1
+        cfree10: string, //cfree10
+        cfree2: string, //cfree2
+        cfree3: string, //cfree3
+        cfree4: string, //cfree4
+        cfree5: string, //cfree5
+        cfree6: string, //cfree6
+        cfree7: string, //cfree7
+        cfree8: string, //cfree8
+        cfree9: string, //cfree9
+        cinvcode: string, //存货编码
+        citem_class: string, //项目大类
+        citemcname: string, //项目大类名称
+        citemcode: string, //项目编码
+        cmassunit: number, //保质期单位
+        cmocode: string, //生产订单号
+        cmolotcode: string, //生产批号
+        cmworkcentercode: string, //工作中心
+        cname: string, //cname
+        comcode: string, //委外订单号
+        copdesc: string, //工艺路线描述
+        corufts: string, //原始时间戳
+        cpesocode: string, //pe件需求号
+        crejectcode: string, //不良品单号
+        cservicecode: string, //服务单号
+        csocode: string, //订单号
+        cwhcode: string, //仓库编码
+        dduedate: Date, //预计出库日期
+        dexpirationdate: Date, //有效期计算项
+        dmadedate: Date, //生产日期
+        dvdate: Date, //失效日期
+        foutnum: number, //出库件数
+        foutquantity: number, //出库数量
+        id: number, //id
+        iexpiratdatecalcu: number, //有效期推算方式
+        iinvexchrate: number, //换算率
+        imassdate: number, //保质期
+        imoseq: number, //生产订单行号
+        impoids: bigint, //生产订单id
+        inum: number, //件数
+        invcode: string, //存货编码
+        iomodid: number, //委外订单子表id
+        iomomid: number, //委外订单材料id
+        iopseq: string, //行号
+        iordercode: string, //出库单号
+        iorderdid: number, //出库id
+        iorderseq: number, //出库行号
+        iordertype: number, //订单类型
+        ipesodid: string, //pe订单id
+        ipesoseq: number, //pe订单行号
+        ipesotype: number, //pe订单类型
+        ipickednum: number, //已拣货件数
+        ipickedquantity: number, //已拣货数量
+        iquantity: number, //数量
+        irowno: number, //单据体行号
+        isodid: string, //需求id
+        isoseq: number, //需求行号
+        isotype: number //需求类型
     }
 
 }

@@ -66,6 +66,7 @@ function txx(src, desc) {
             case 'udt_qty':
             case 'udt_rate':
             case 'udt_rate100':
+            case 'userdecimal':
                 return "number";
             case 'bit':
                 return "boolean";
@@ -99,7 +100,6 @@ function txx(src, desc) {
             case 'ufreference':
             case 'ufuid':
             case 'uniqueidentifier':
-            case 'userdecimal':
             case 'varbinary':
             case 'binary':
             default:
@@ -157,7 +157,7 @@ function txx(src, desc) {
                 continue;
             r = r.replace(/\r?\n/g, '');
             var rx = r.split(/\t/);
-            s += rx[0] + ':' + CastType(rx[1]);
+            s += rx[0].toLowerCase() + ':' + CastType(rx[1]);
             if (i < desc_ss.length - 1)
                 s += ',';
             s += ' //' + rx[3] + "\r\n";
@@ -173,4 +173,29 @@ function splitEx(s, spliter, each) {
         vs += (each(ss[i].replace(/(\r?\n)|\t/g, ''), i));
     }
     return vs;
+}
+function format(vs) {
+    var vx = vs.split(/\r?\n/);
+    var tb = [];
+    var cs = [];
+    var r_hz = /^[\u4e00-\u9fa5]$/;
+    for (var i = 0; i < vx.length; i++) {
+        var r = vx[i].split('\t');
+        for (var c = 0; i < r.length; i++) {
+            var cx = r[c];
+            var l = 0;
+            for (var z = 0; z < cx.length; z++) {
+                if (r_hz.test(cx[z]))
+                    l += 2;
+                else
+                    l++;
+            }
+            var fx = cs[c] == undefined ? 0 : cs[c];
+            if (l > fx)
+                cs[c] = l;
+        }
+        tb.push(r);
+    }
+    ;
+    return cs;
 }

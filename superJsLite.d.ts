@@ -223,6 +223,10 @@ interface Date{
     toYMD(more?:0|1|2|3|4):string;
     /**返回不包括时间部分的日期 */
     date:Date;
+    /**返回 date 减去当前值得差 */
+    diff(type:'y'|'yy'|'yyyy'|'year'|'m'|'mm'|'month'|'d'|'dd'|'day'|'h'|'hh'|'hour'|'mi'|'minutes'|'s'|'sec'|'second',date:Date):number;
+    /**返回一个指定日期的相加值 */
+    add(type:'y'|'yy'|'yyyy'|'year'|'m'|'mm'|'month'|'d'|'dd'|'day'|'h'|'hh'|'hour'|'mi'|'minutes'|'s'|'sec'|'second',x:number):Date;
 }
 
 interface ICommand{
